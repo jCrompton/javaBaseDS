@@ -1,6 +1,8 @@
 // parent = (index-2)/2
 // left = (index*2) + 1
 // right = (index*2) + 2
+import java.util.Arrays;
+
 public class MinIntHeap {
   private int capacity = 20;
   private int size = 0;
@@ -24,7 +26,7 @@ public class MinIntHeap {
     items[indexOne] = items[indexTwo];
     items[indexTwo] = temp;
   }
-  private boolean ensureExtraCapacity() {
+  private void ensureExtraCapacity() {
     if (size == capacity) {
       items = Arrays.copyOf(items, capacity *2);
       capacity *= 2;
@@ -60,7 +62,7 @@ public class MinIntHeap {
   }
   public void heapifyDown() {
     int index = 0;
-    while( hasLeftCHild(index) ) {
+    while(hasLeftChild(index)) {
       int smallerChildIndex = getLeftChildIndex(index);
       if (hasRightChild(index) && rightChild(index) < leftChild(index)) {
         smallerChildIndex = getRightChildIndex(index);
@@ -71,6 +73,7 @@ public class MinIntHeap {
       } else {
         swap(index, smallerChildIndex);
       }
+      index = smallerChildIndex;
     }
   }
 }
